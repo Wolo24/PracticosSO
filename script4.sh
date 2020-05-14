@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo hola
+
 user=$(whoami)
  
  if [ user='agustinrobaina' ]; then
