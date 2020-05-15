@@ -9,8 +9,45 @@ case $opt in
 #OPCION1
 FicheroODirectorio)
 echo Ha elegido la opcion: Fichero O Directorio
-;;
 
+#LA VARIABLE CONTROL CONTIENE LA CANTIDAD DE PARAMETROS QUE SE LE PASAN AL SCRIPT
+
+control=$#
+
+function verifDirectorio {
+
+if [ -d $1 ]; then
+
+echo "Es un directorio"
+
+fi
+}
+
+function verifFichero {
+
+if [ -f $1 ]; then
+
+echo "Es un fichero"
+
+fi
+
+}
+
+#VALIDA Q SI SE LE PASARON O NO PARAMETROS AL SCRIPT
+
+if [ $control -eq 0 ];then
+
+echo 
+echo "No se paso ningun parametro"
+
+else
+
+verifDirectorio $1
+verifFichero $1
+
+fi
+
+;;
 
 #OPCION 2
 TamanoMB)
@@ -31,6 +68,7 @@ echo "Por favor ingrese un comando luego del nombre del script"
 echo "practico4.sh + comando a ejecutar" 
 fi
 
+echo rv : $?
 ;;
 
 #OPCION4
@@ -69,6 +107,20 @@ date=$
 echo $user
 
 tar -czf /home/$user/PracticosSO/backups/backup_home_$(date +%Y-%m-%d_%H%M%S).tar.gz /home/$user
+
+ rv=$?
+
+if [ $rv -gt 0 ]; then
+
+echo "El backup pudo o no haberse realizado" 
+echo "Ha habido un error durante la realizacion del backup"
+
+
+else
+
+echo "El backup se ha realizado correctamente"
+
+fi
 
 ;;
 
